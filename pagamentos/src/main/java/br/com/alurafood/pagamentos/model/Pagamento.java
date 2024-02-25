@@ -1,87 +1,58 @@
 package br.com.alurafood.pagamentos.model;
 
-import java.math.BigDecimal;
-
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Positive;
-import javax.validation.constraints.Size;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
+import javax.validation.constraints.Size;
+import java.math.BigDecimal;
+
 @Entity
-@Table(name = "tb_pagamentos")
+@Table(name = "pagamentos")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class Pagamento {
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
-	
-	@NotNull
-	@Positive
-	private BigDecimal valor;
-	
-	@NotBlank
-	@Size(max = 100)
-	private String nome;
-	
-	@NotBlank
-	@Size(max = 19)
-	private String numero;
-	
-	@NotBlank
-	@Size(max = 7)
-	private String expiracao;
-	
-	@NotBlank
-	@Size(max = 3, min = 3)
-	private String codigo;
-	
-	@NotNull
-	@Enumerated(EnumType.STRING)
-	private Status status;
-	
-	@NotNull
-	private Long pedidoId;
-	
-	@NotNull
-	private Long formaDePagamento;
-	
-	public Pagamento(){
-		
-	}
 
-	public Pagamento(Long id, @NotNull @Positive BigDecimal valor, @NotBlank @Size(max = 100) String nome,
-			@NotBlank @Size(max = 19) String numero, @NotBlank @Size(max = 7) String expiracao,
-			@NotBlank @Size(max = 3, min = 3) String codigo, @NotNull Status status, @NotNull Long pedidoId,
-			@NotNull Long formaDePagamento) {
-		super();
-		this.id = id;
-		this.valor = valor;
-		this.nome = nome;
-		this.numero = numero;
-		this.expiracao = expiracao;
-		this.codigo = codigo;
-		this.status = status;
-		this.pedidoId = pedidoId;
-		this.formaDePagamento = formaDePagamento;
-	}
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
+    @NotNull
+    @Positive
+    private BigDecimal valor;
 
+    @NotBlank
+    @Size(max=100)
+    private String nome;
+
+    @NotBlank
+    @Size(max=19)
+    private String numero;
+
+    @NotBlank
+    @Size(max=7)
+    private String expiracao;
+
+    @NotBlank
+    @Size(min=3, max=3)
+    private String codigo;
+
+    @NotNull
+    @Enumerated(EnumType.STRING)
+    private Status status;
+
+    @NotNull
+    private Long pedidoId;
+
+    @NotNull
+    private Long formaDePagamentoId;
 
 	public Long getId() {
 		return id;
@@ -147,11 +118,11 @@ public class Pagamento {
 		this.pedidoId = pedidoId;
 	}
 
-	public Long getFormaDePagamento() {
-		return formaDePagamento;
+	public Long getFormaDePagamentoId() {
+		return formaDePagamentoId;
 	}
 
-	public void setFormaDePagamento(Long formaDePagamento) {
-		this.formaDePagamento = formaDePagamento;
+	public void setFormaDePagamentoId(Long formaDePagamentoId) {
+		this.formaDePagamentoId = formaDePagamentoId;
 	}
 }

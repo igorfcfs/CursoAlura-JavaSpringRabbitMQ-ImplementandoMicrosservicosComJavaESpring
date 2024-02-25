@@ -53,4 +53,5 @@ public class PagamentoController {
         service.excluirPagamento(id);
         return ResponseEntity.noContent().build();
     }
+
 }
